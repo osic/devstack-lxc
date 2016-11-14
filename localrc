@@ -1,0 +1,46 @@
+[[local|localrc]]
+
+DATABASE_PASSWORD=password
+ADMIN_PASSWORD=password
+SERVICE_PASSWORD=password
+SERVICE_TOKEN=password
+RABBIT_PASSWORD=password
+
+# Pre-requisite
+ENABLED_SERVICES=rabbit,mysql,key
+
+# Nova
+ENABLED_SERVICES+=,n-api,n-crt,n-obj,n-cpu,n-cond,n-sch  
+IMAGE_URLS+=",http://download.cirros-cloud.net/0.3.3/cirros-0.3.3-x86_64-disk.img"
+
+# Glance
+ENABLED_SERVICES+=,g-api,g-reg
+
+# Neutron
+ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron,q-ip-availability,q-metering
+
+# Cinder
+#ENABLED_SERVICES+=,cinder,c-api,c-vol,c-sch
+
+SCREEN_LOGDIR=/opt/stack/new/screen-logs
+LOGFILE=/opt/stack/new/devstacklog.txt
+VERBOSE=True
+FIXED_RANGE=10.1.0.0/20
+FLOATING_RANGE=172.24.5.0/24
+PUBLIC_NETWORK_GATEWAY=172.24.5.1
+FIXED_NETWORK_SIZE=4096
+VIRT_DRIVER=libvirt
+SWIFT_REPLICAS=1
+LOG_COLOR=False
+# Don't reset the requirements.txt files after g-r updates
+UNDO_REQUIREMENTS=False
+CINDER_PERIODIC_INTERVAL=10
+export OS_NO_CACHE=True
+CEILOMETER_BACKEND=mysql
+LIBS_FROM_GIT=
+DATABASE_QUERY_LOGGING=True
+# set this until all testing platforms have libvirt >= 1.2.11
+# see bug #1501558
+EBTABLES_RACE_FIX=True
+LIBVIRT_TYPE=qemu
+FORCE_CONFIG_DRIVE=False
