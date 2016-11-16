@@ -1,1 +1,1 @@
-apt-get install lxc lxctl lxc-templates
+apt-get install -qqy lxc lxctl lxc-templates qemu

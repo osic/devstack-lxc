@@ -20,6 +20,9 @@ ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron,q-ip-availability,q-me
 # Cinder
 #ENABLED_SERVICES+=,cinder,c-api,c-vol,c-sch
 
+# Tempest
+ENABLED_SERVICES+=,tempest
+
 SCREEN_LOGDIR=/opt/stack/new/screen-logs
 LOGFILE=/opt/stack/new/devstacklog.txt
 VERBOSE=True
