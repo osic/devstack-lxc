@@ -1,1 +1,0 @@
-apt-get install -qqy lxc lxctl lxc-templates qemu debootstrap
