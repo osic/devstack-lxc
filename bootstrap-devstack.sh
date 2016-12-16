@@ -10,14 +10,22 @@ apt-get update
 apt-get install -qqy git
 
 # Get the devstack repo and add the config file for the controller
-git clone https://github.com/openstack-dev/devstack.git ~/devstack
-cd ~/devstack
+git clone https://github.com/openstack-dev/devstack.git /root/devstack
 controller_ip=$( ip addr show ens3 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1 )
 sed -ir "s|{ host_ip }|$controller_ip|g" ~/devstack-lxc/local.conf
-cp ~/devstack-lxc/local.conf ~/devstack/local.conf
+cp ~/devstack-lxc/local.conf /root/devstack/local.conf
+
+# Create the "stack" user to use for installing devstack
+export HOST_IP=$controller_ip
+/root/devstack/tools/create-stack-user.sh
+
+# Copy the devstack directory to opt/stack
+cp -r /root/devstack /opt/stack
 
 # Run the script to install devstack
-./stack.sh
+sudo chown -R stack:stack  /opt/stack/devstack
+cd /opt/stack/devstack
+sudo -u stack -H sh -c "export HOST_IP=$controller_ip; ./stack.sh"
 
 
 # ===============
