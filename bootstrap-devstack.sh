@@ -28,6 +28,12 @@ cd /opt/stack/devstack
 sudo -u stack -H sh -c "export HOST_IP=$controller_ip; ./stack.sh"
 
 
+# ========================
+# Create the lxc container
+# ========================
+~/devstack-lxc/setup.sh
+
+
 # ===============
 # Compute Node
 # ===============
