@@ -17,6 +17,7 @@ sed -ir "s|{ host_ip }|$controller_ip|g" ~/devstack-lxc/local.conf
 cp ~/devstack-lxc/local.conf ~/devstack/local.conf
 
 # Run the script to install devstack
+./stack.sh
 
 
 # ===============
