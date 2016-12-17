@@ -9,15 +9,15 @@
 apt-get update
 apt-get install -qqy git
 
-# Create the "stack" user to use for installing devstack
+# Create the "stack" user used to install devstack
 controller_ip=$( ip addr show ens3 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1 )
 git clone https://github.com/openstack-dev/devstack.git /root/devstack
 export HOST_IP=$controller_ip
 /root/devstack/tools/create-stack-user.sh
 
-# Configure devstack for a controller node
-sed -ir "s|{ host_ip }|$controller_ip|g" ~/devstack-lxc/local.conf
-cp ~/devstack-lxc/local.conf /root/devstack/local.conf
+# Configure devstack for the controller node
+cp ~/devstack-lxc/controller-local.conf /root/devstack/local.conf
+sed -ir "s|{ host_ip }|$controller_ip|g" /root/devstack/local.conf
 # TODO (Cas): This line is needed in the lxc container for devstack to work.
 # It is yet to be discovered if it is needed in the host VM.
 #sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-${proto}tables=1/echo "Skipping. This breaks when run in a LXC container."/g' /root/devstack/functions
@@ -34,7 +34,7 @@ sudo -u stack -H sh -c "export HOST_IP=$controller_ip; ./stack.sh"
 # ========================
 # Create the lxc container
 # ========================
-~/devstack-lxc/setup.sh
+~/devstack-lxc/setup-container.sh
 
 
 # ===============
@@ -51,15 +51,14 @@ lxc-attach -n devstack-node -- bash -c "git clone https://github.com/openstack-d
 lxc-attach -n devstack-node -- bash -c "export HOST_IP=$node_ip; /root/devstack/tools/create-stack-user.sh"
 
 # Configure devstack for a compute node
-sed -ir "s|{ service_host }|$controller_ip|g" ~/devstack-lxc/compute-node.conf
-sed -ir "s|{ host_ip }|$node_ip|g" ~/devstack-lxc/compute-node.conf
-cp ~/devstack-lxc/compute-node.conf /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
-# This line needs to be removed so devstack does not fail in a container
+cp ~/devstack-lxc/compute-local.conf /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
+sed -ir "s|{ service_host }|$controller_ip|g" /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
+sed -ir "s|{ host_ip }|$node_ip|g" /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
+# This line below is to remove a line in devstack/functions so devstack
+# does not fail when installing in a container
 # TODO (Cas): If the host does not need this lane changed we can change it
 # here before copying it
-sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-${proto}tables=1/echo "Skipping. This breaks when run in a LXC container."/g' /root/devstack/functions
-rm /var/lib/lxc/devstack-node/rootfs/root/devstack/functions
-cp /root/devstack/functions /var/lib/lxc/devstack-node/rootfs/root/devstack
+sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-${proto}tables=1/echo "Skipping. This breaks when run in a LXC container."/g' /var/lib/lxc/devstack-node/rootfs/root/devstack/functions
 
 # Copy the devstack directory to opt/stack
 lxc-attach -n devstack-node -- bash -c "cp -r /root/devstack /opt/stack"
