@@ -8,6 +8,5 @@ echo "Starting the lxc container  ..."
 lxc-start --name devstack-node && \
 echo "The lxc container devstack-node is active." || \
 echo "The lxc container devstack-node failed to be started."
-
-# Add some sleep time to allow for the interfaces to finish going up
-sleep 5 
+# Wait up to 5 minutes for the container to be running
+lxc-wait -n devstack-node -s RUNNING -t 300

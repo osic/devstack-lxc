@@ -18,9 +18,6 @@ export HOST_IP=$controller_ip
 # Configure devstack for the controller node
 cp ~/devstack-lxc/controller-local.conf /root/devstack/local.conf
 sed -ir "s|{ host_ip }|$controller_ip|g" /root/devstack/local.conf
-# TODO (Cas): This line is needed in the lxc container for devstack to work.
-# It is yet to be discovered if it is needed in the host VM.
-#sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-${proto}tables=1/echo "Skipping. This breaks when run in a LXC container."/g' /root/devstack/functions
 
 # Copy the devstack directory to opt/stack
 cp -r /root/devstack /opt/stack
@@ -56,8 +53,6 @@ sed -ir "s|{ service_host }|$controller_ip|g" /var/lib/lxc/devstack-node/rootfs/
 sed -ir "s|{ host_ip }|$node_ip|g" /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
 # This line below is to remove a line in devstack/functions so devstack
 # does not fail when installing in a container
-# TODO (Cas): If the host does not need this lane changed we can change it
-# here before copying it
 sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-${proto}tables=1/echo "Skipping. This breaks when run in a LXC container."/g' /var/lib/lxc/devstack-node/rootfs/root/devstack/functions
 
 # Copy the devstack directory to opt/stack

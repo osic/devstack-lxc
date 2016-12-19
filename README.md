@@ -1,8 +1,8 @@
 # devstack-lxc
-Shell scripts to configure a LXC container to run DevStack
+Shell scripts to deploy a multi-node Devstack environment with one node in the host system and one compute node in an LXC container within the host.
 
 # Steps to Use
 - Clone this repository
-- Run bootstrap-devstack.sh
+- Run install-devstack.sh
 
 To stop and destroy the container, run teardown.sh
