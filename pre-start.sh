@@ -1,6 +1,5 @@
 ip link add name lxcbr0 type bridge
 ip link set lxcbr0 up
-ip addr add 10.0.1.1/24 dev lxcbr0
 
 modprobe openvswitch
 modprobe ebtables
