@@ -60,5 +60,5 @@ lxc-attach -n devstack-node -- bash -c "cp -r /root/devstack /opt/stack"
 lxc-attach -n devstack-node -- bash -c "sudo chown -R stack:stack  /opt/stack/devstack"
 
 # Run the script to install devstack
-lxc-attach -n devstack-node -- bash -c "cd /opt/stack/devstack; sudo -u stack -H sh -c 'export HOST_IP=$controller_ip; ./stack.sh' "
+lxc-attach -n devstack-node -- bash -c "cd /opt/stack/devstack; sudo -u stack -H sh -c 'export HOST_IP=$node_ip; ./stack.sh' "
 
