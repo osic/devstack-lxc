@@ -1,11 +1,11 @@
-# Prepare the Devstack config files for the controller and the node
+# Prepare the Devstack config files for the controller and Compute nodes
 # and copy them to the devstack directory
 
 
-# ========================
-# Create the lxc container
-# ========================
-~/devstack-lxc/setup-container.sh
+# =========================
+# Create the lxc containers
+# =========================
+~/devstack-lxc/setup-containers.sh
 
 
 # ===============
