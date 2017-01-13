@@ -35,6 +35,7 @@ sed -i -e "/git_clone \$BASE_DEVSTACK_REPO \$BASE_DEVSTACK_DIR \$BASE_DEVSTACK_B
 
 # Do not shut down the OpenStack services or the compute node
 # will fail to install. Overwrite grenade.sh script
+sed -i '/echo_summary "Shutting down all services on base devstack..."/i #echo_summary "NOTE: Overwriting the Grenade script to not stop the OpenStack services so we can install the compute node."' /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh
 sed -i 's/echo_summary "Shutting down all services on base devstack..."/#echo_summary "Shutting down all services on base devstack..."/g' /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh
 sed -i 's/shutdown_services/#shutdown_services/g' /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh
 sed -i 's/resources verify_noapi pre-upgrade/#resources verify_noapi pre-upgrade/g' /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh
