@@ -1,5 +1,6 @@
 # devstack-lxc
-Shell scripts to deploy a multi-node Devstack environment with both nodes in LXCs container within the host.
+Shell scripts to deploy a multi-node Devstack environment with both nodes in LXCs containers within the host.
+The controller node is deployed with Grenade so we can run upgrade tests in the multi-node environment.
 
 # Steps to Use
 - Change to the root user: sudo su -

@@ -1,0 +1,35 @@
+# Multihost configuration
+MULTI_HOST=1
+HOST_IP={ host_ip }
+
+# Replication of gate configuration. Below helps you get to a
+# configuration that looks a lot like what we use in the gate
+USE_SCREEN=False
+
+# Neutron needs a lot of manual hand holding to get rolling, we
+# specify a lot of config in the gate in neutron jobs related to
+# networks.
+Q_USE_DEBUG_COMMAND=True
+NETWORK_GATEWAY=192.168.0.1
+FIXED_RANGE=192.168.0.0/20
+FLOATING_RANGE=172.24.5.0/24
+PUBLIC_NETWORK_GATEWAY=172.24.5.1
+
+# Services
+# --------
+# Pre-requisite
+ENABLED_SERVICES=rabbit,mysql,key
+# Nova
+ENABLED_SERVICES+=,n-api,n-crt,n-obj,n-cpu,n-cond,n-sch
+# Glance
+ENABLED_SERVICES+=,g-api,g-reg
+# Neutron
+ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron,q-ip-availability,q-metering
+# Cinder
+#ENABLED_SERVICES+=,cinder,c-api,c-vol,c-sch
+# Swift
+#ENABLED_SERVICES+=,s-proxy,s-object,s-container,s-account
+# Since Swift is being enabled in the devstack.localrc.base we need to disable it here
+disable_service s-proxy s-object s-container s-account
+# Tempest
+enable_service tempest
