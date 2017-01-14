@@ -58,7 +58,7 @@ lxc-attach -n compute-node -- bash -c "apt-get update; apt-get install -qqy bsdm
 # Note: Get a devstack release that matches the base grenade devstack.
 compute_inet=$( lxc-attach -n compute-node -- bash -c "ip addr show eth0 | grep 'inet\b'" )
 compute_ip=$( echo $compute_inet | awk '{print $2}' | cut -d/ -f1 )
-lxc-attach -n compute-node -- bash -c "git -b stable/newton clone https://github.com/openstack-dev/devstack.git /root/devstack"
+lxc-attach -n compute-node -- bash -c "git clone -b stable/newton https://github.com/openstack-dev/devstack.git /root/devstack"
 lxc-attach -n compute-node -- bash -c "export HOST_IP=$compute_ip; /root/devstack/tools/create-stack-user.sh"
 
 # Configure devstack for a compute node
