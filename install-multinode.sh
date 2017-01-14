@@ -52,7 +52,7 @@ lxc-attach -n controller-node -- bash -c "cd /opt/stack/grenade; sudo -u stack -
 # Compute Node
 # ===============
 
-lxc-attach -n controller-node -- bash -c "apt-get update; apt-get install -qqy bsdmainutils git ca-certificates python-pip vim build-essential libssl-dev libffi-dev python-dev libxml2-dev libxslt1-dev libpq-dev"
+lxc-attach -n compute-node -- bash -c "apt-get update; apt-get install -qqy bsdmainutils git ca-certificates python-pip vim build-essential libssl-dev libffi-dev python-dev libxml2-dev libxslt1-dev libpq-dev"
 
 # Create the "stack" user to use for installing devstack. 
 # Note: Get a devstack release that matches the base grenade devstack.
