@@ -30,8 +30,8 @@ sed -ir "s|{ host_ip }|$controller_ip|g" /var/lib/lxc/controller-node/rootfs/roo
 
 # This line below is to remove a line in devstack/functions so devstack
 # does not fail when installing in a container
-devstack_fix="sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-\${proto}tables=1/echo \"Skipping. This breaks when run in a LXC container.\"/g' \$BASE_DEVSTACK_DIR/functions"
-sed -i -e "/git_clone \$BASE_DEVSTACK_REPO \$BASE_DEVSTACK_DIR \$BASE_DEVSTACK_BRANCH/a $devstack_fix" /var/lib/lxc/controller-node/rootfs/root/grenade/inc/bootstrap
+devstack_fix="\        sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-\${proto}tables=1/echo \"Skipping. This breaks when run in a LXC container.\"/g' \$BASE_DEVSTACK_DIR/functions"
+sed -i "/git_clone \$BASE_DEVSTACK_REPO \$BASE_DEVSTACK_DIR \$BASE_DEVSTACK_BRANCH/a $devstack_fix" /var/lib/lxc/controller-node/rootfs/root/grenade/inc/bootstrap
 
 # Do not shut down the OpenStack services or the compute node
 # will fail to install. Overwrite grenade.sh script
@@ -39,6 +39,11 @@ sed -i '/echo_summary "Shutting down all services on base devstack..."/i #echo_s
 sed -i 's/echo_summary "Shutting down all services on base devstack..."/#echo_summary "Shutting down all services on base devstack..."/g' /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh
 sed -i 's/shutdown_services/#shutdown_services/g' /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh
 sed -i 's/resources verify_noapi pre-upgrade/#resources verify_noapi pre-upgrade/g' /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh
+
+# Move the services shutdown and pre-upgrade resources verification to the
+# begining of the Upgrade stage of the script
+shutdown_services="\    echo_summary \"NOTE: Overwriting the Grenade script to shutdown the OpenStack services as first step of te upgrade.\"\n    echo_summary \"Shutting down all services on base devstack...\"\n    shutdown_services\n    resources verify_noapi pre-upgrade\n" 
+sed -i "/if \[\[ \"\$RUN_TARGET\" == \"True\" \]\]; then/a $shutdown_services" /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh 
 
 # Copy the devstack directory to opt/stack
 lxc-attach -n controller-node -- bash -c "cp -r /root/grenade /opt/stack"
