@@ -81,3 +81,9 @@ lxc-attach -n compute-node -- bash -c "sudo chown -R stack:stack  /opt/stack/dev
 # Run the script to install devstack
 lxc-attach -n compute-node -- bash -c "cd /opt/stack/devstack; sudo -u stack -H sh -c 'export HOST_IP=$compute_ip; ./stack.sh' "
 
+
+# ===============
+# Run The Upgrade
+# ===============
+
+lxc-attach -n controller-node -- bash -c "cd /opt/stack/grenade; sudo -u stack -H sh -c './grenade.sh -t' "
