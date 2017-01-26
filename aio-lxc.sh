@@ -29,8 +29,9 @@ lxc-attach -n devstack-node -- bash -c "git clone https://github.com/openstack-d
 lxc-attach -n devstack-node -- bash -c "export HOST_IP=$node_ip; /root/devstack/tools/create-stack-user.sh"
 
 # Configure devstack for an all in one
-cp ~/devstack-lxc/aio-local.conf /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
+cp ~/devstack-lxc/controller-local.conf /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
 sed -ir "s|{ host_ip }|$node_ip|g" /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
+sed -i 's/MULTI_HOST=1/#MULTI_HOST=1/g' /var/lib/lxc/devstack-node/rootfs/root/devstack/local.conf
 # This line below is to remove a line in devstack/functions so devstack
 # does not fail when installing in a container
 sed -i -e 's/sudo sysctl -w net.bridge.bridge-nf-call-${proto}tables=1/echo "Skipping. This breaks when run in a LXC container."/g' /var/lib/lxc/devstack-node/rootfs/root/devstack/functions

@@ -5,7 +5,7 @@
 # ========================
 # Create the lxc container
 # ========================
-~/devstack-lxc/setup-container.sh
+~/devstack-lxc/setup-containers.sh devstack-node
 
 
 # ===============
