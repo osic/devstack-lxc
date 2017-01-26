@@ -4,7 +4,7 @@ Shell scripts to deploy different types of Devstack environments using LXC conta
 
 # Steps to Use
 - Change to the root user: sudo su -
-- Clone this repository
+- Clone this repository: git clone https://github.com/osic/devstack-lxc.git
 - Run one of these scripts depending on what kind of environment you want:
      - aio-lxc.sh: Installs Devstack in an LXC container. 
      - multinode-lxc.sh: Installs a multi-node Devstack (2 nodes) in LXC containers.
