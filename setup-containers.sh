@@ -3,7 +3,8 @@ apt-get install -qqy lxc lxctl lxc-templates qemu debootstrap
 
 # Create and start the containers
 echo "Creating the lxc containers ..."
-for container in "controller-node" "compute-node"
+containers="${@:-"controller-node" "compute-node"}"
+for container in $containers
 do
 
     lxc-create -t ubuntu -n $container -f ~/devstack-lxc/container.conf
@@ -13,6 +14,8 @@ do
     echo "The lxc container $container failed to be started."
     # Wait up to 5 minutes for the container to be running
     lxc-wait -n $container -s RUNNING -t 300    
+    # Save the container to a file so it can de deleted later
+    echo $container >> containers.txt
 	
 done
 
