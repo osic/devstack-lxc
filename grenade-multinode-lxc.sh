@@ -13,7 +13,7 @@
 # ===============
 
 # Install dependencies
-lxc-attach -n controller-node -- bash -c "apt-get update; apt-get install -qqy bsdmainutils git ca-certificates python-pip vim build-essential libssl-dev libffi-dev python-dev libxml2-dev libxslt1-dev libpq-dev"
+lxc-attach -n controller-node -- bash -c "apt-get update; apt-get install -qqy bsdmainutils git ca-certificates python-pip vim build-essential libssl-dev libffi-dev python-dev libxml2-dev libxslt1-dev libpq-dev python3-pip"
 
 # Create the "stack" user to use for installing devstack
 controller_inet=$( lxc-attach -n controller-node -- bash -c "ip addr show eth0 | grep 'inet\b'" )
@@ -45,6 +45,9 @@ sed -i 's/resources verify_noapi pre-upgrade/#resources verify_noapi pre-upgrade
 shutdown_services="\    echo_summary \"NOTE: Overwriting the Grenade script to shutdown the OpenStack services as first step of te upgrade.\"\n    echo_summary \"Shutting down all services on base devstack...\"\n    shutdown_services\n    resources verify_noapi pre-upgrade\n" 
 sed -i "/if \[\[ \"\$RUN_TARGET\" == \"True\" \]\]; then/a $shutdown_services" /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh 
 
+# Temporary fix for Grenade until bug 1659081 is resolved
+sed -i '/source $TARGET_DEVSTACK_DIR\/inc\/python/i source $TARGET_DEVSTACK_DIR/functions-common' /var/lib/lxc/controller-node/rootfs/root/grenade/inc/bootstrap
+
 # Copy the devstack directory to opt/stack
 lxc-attach -n controller-node -- bash -c "cp -r /root/grenade /opt/stack"
 lxc-attach -n controller-node -- bash -c "sudo chown -R stack:stack  /opt/stack/grenade"
@@ -57,7 +60,7 @@ lxc-attach -n controller-node -- bash -c "cd /opt/stack/grenade; sudo -u stack -
 # Compute Node
 # ===============
 
-lxc-attach -n compute-node -- bash -c "apt-get update; apt-get install -qqy bsdmainutils git ca-certificates python-pip vim build-essential libssl-dev libffi-dev python-dev libxml2-dev libxslt1-dev libpq-dev"
+lxc-attach -n compute-node -- bash -c "apt-get update; apt-get install -qqy bsdmainutils git ca-certificates python-pip vim build-essential libssl-dev libffi-dev python-dev libxml2-dev libxslt1-dev libpq-dev python3-pip"
 
 # Create the "stack" user to use for installing devstack. 
 # Note: Get a devstack release that matches the base grenade devstack.
