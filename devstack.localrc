@@ -19,12 +19,8 @@ PUBLIC_NETWORK_GATEWAY=172.24.5.1
 # --------
 # Pre-requisite
 ENABLED_SERVICES=rabbit,mysql,key
-# Nova
-ENABLED_SERVICES+=,n-api,n-crt,n-obj,n-cpu,n-cond,n-sch
-# Glance
-ENABLED_SERVICES+=,g-api,g-reg
-# Neutron
-ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron,q-ip-availability,q-metering
+# Nova + Glance + Neutron
+ENABLED_SERVICES+=,n-api,n-crt,n-obj,n-cpu,n-cond,n-sch,g-api,g-reg,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron,q-ip-availability,q-metering
 # Cinder
 #ENABLED_SERVICES+=,cinder,c-api,c-vol,c-sch
 # Swift
