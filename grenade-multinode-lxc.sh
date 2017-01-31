@@ -89,4 +89,5 @@ lxc-attach -n compute-node -- bash -c "cd /opt/stack/devstack; sudo -u stack -H 
 # Run The Upgrade
 # ===============
 
+lxc-attach -n controller-node -- bash -c "apt-get install -qqy python3-pip"
 lxc-attach -n controller-node -- bash -c "cd /opt/stack/grenade; sudo -u stack -H sh -c './grenade.sh -t' "
