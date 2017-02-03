@@ -45,9 +45,6 @@ sed -i 's/resources verify_noapi pre-upgrade/#resources verify_noapi pre-upgrade
 shutdown_services="\    echo_summary \"NOTE: Overwriting the Grenade script to shutdown the OpenStack services as first step of te upgrade.\"\n    echo_summary \"Shutting down all services on base devstack...\"\n    shutdown_services\n    resources verify_noapi pre-upgrade\n" 
 sed -i "/if \[\[ \"\$RUN_TARGET\" == \"True\" \]\]; then/a $shutdown_services" /var/lib/lxc/controller-node/rootfs/root/grenade/grenade.sh 
 
-# Temporary fix for Grenade until bug 1659081 is resolved
-sed -i '/source $TARGET_DEVSTACK_DIR\/inc\/python/i source $TARGET_DEVSTACK_DIR/functions-common' /var/lib/lxc/controller-node/rootfs/root/grenade/inc/bootstrap
-
 # Copy the devstack directory to opt/stack
 lxc-attach -n controller-node -- bash -c "cp -r /root/grenade /opt/stack"
 lxc-attach -n controller-node -- bash -c "sudo chown -R stack:stack  /opt/stack/grenade"
