@@ -1,5 +1,4 @@
 # devstack-lxc
-# **** KC Test Addition
 
 Shell scripts to deploy different types of Devstack environments using LXC containers.
 
