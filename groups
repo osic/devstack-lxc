@@ -1,5 +1,6 @@
-# UUID                 	Group Name
+# UUID                                  	Group Name
 #
-global:Anonymous-Users 	Anonymous Users
-global:Registered-Users	Registered Users
-user:CasJ              	user/Castulo J. Martinez (CasJ)
+59102392efab63928f2ecc2297b059c2b10bc139	OSIC-QE-Developers
+global:Anonymous-Users                  	Anonymous Users
+global:Registered-Users                 	Registered Users
+user:CasJ                               	user/Castulo J. Martinez (CasJ)
