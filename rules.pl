@@ -21,9 +21,9 @@
 % commit_committer(user(1000000), 'Castulo J. Martinez', 'castulo.martinez@intel.com').
 % commit_message('Add plugin support to Gerrit').
 
-submit_rule(submit(CR)) :-
+submit_rule(submit(CR, R)) :-
     base(CR),
-    CR = label(_, ok(user(Reviewer))),
+    R = label(_, ok(user(Reviewer))),
     gerrit:commit_author(user(Author)),
     Author \= Reviewer,
     !.
