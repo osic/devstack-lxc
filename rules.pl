@@ -25,5 +25,5 @@ submit_rule(submit(CR)) :-
     CR = label('Author-Required', need(_)).
 
 submit_rule(submit(CR)) :-
-    gerrit:commit_author(user(ID), 'Castulo Martinez', _),
+    gerrit:commit_author(user(ID), 'Castulo J. Martinez', _),
     CR = label('Code-Review', ok(user(ID))).
