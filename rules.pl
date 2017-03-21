@@ -28,6 +28,6 @@ submit_rule(submit(CR)) :-
     Author \= Reviewer,
     !.
 
-submit_rule(submit(CR)) :-
+submit_rule(submit(CR, N)) :-
     gerrit:max_with_block(-2, 2, 'Code-Review', CR),
     N = label('Non-Author-Code-Review', need(_)).
