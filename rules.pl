@@ -22,4 +22,4 @@
 % commit_message('Add plugin support to Gerrit').
 
 submit_rule(submit(W)) :-
-    W = label('Any-Label-Name', ok(user(1000000))).
+    W = label('Any-Label-Name', ok(user(ID))).
