@@ -23,4 +23,5 @@
 
 submit_rule(submit(CR)) :-
     %CR = label(_, ok(Reviewer)),
-    CR = label('Code-Review', ok(user(1))).
+    gerrit:max_with_block(-2, 2, 'Code-Review', CR).
+    %CR = label('Code-Review', ok(user(1))).
