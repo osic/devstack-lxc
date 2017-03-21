@@ -7,16 +7,19 @@
 % commit_committer(user(1000000), 'Castulo J. Martinez', 'castulo.martinez@intel.com').
 % commit_message('Add plugin support to Gerrit').
 
-submit_rule(submit(CR)) :-
-    base(CR),
-    CR = label(_, ok(Reviewer)),
-    gerrit:commit_author(Author),
-    Author \= Reviewer,
-    !.
+%submit_rule(submit(CR)) :-
+%    base(CR),
+%    CR = label(_, ok(Reviewer)),
+%    gerrit:commit_author(Author),
+%    Author \= Reviewer,
+%    !.
 
 %submit_rule(submit(CR, N)) :-
 %    base(CR),
 %    N = label('Non-Author-Code-Review', need(_)).
 
-base(CR) :-
+%base(CR) :-
+%    gerrit:max_with_block(-2, 2, 'Code-Review', CR).
+
+submit_rule(submit(CR)) :-
     gerrit:max_with_block(-2, 2, 'Code-Review', CR).
