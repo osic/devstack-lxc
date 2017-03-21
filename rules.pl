@@ -21,7 +21,8 @@
 %base(CR) :-
 %    gerrit:max_with_block(-2, 2, 'Code-Review', CR).
 
-submit_rule(submit(NAR)) :-
+submit_rule(submit(CR, N)) :-
+    gerrit:max_with_block(-2, 2, 'Code-Review', CR),
     NAR = label('Non-Author-Code-Review', need(_)).
 
 submit_rule(submit(CR)) :-
