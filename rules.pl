@@ -23,8 +23,8 @@
 
 submit_rule(submit(CR)) :-
     gerrit:max_with_block(-2, 2, 'Code-Review', CR),
-    CR = label(_, ok(Reviewer)),
-    gerrit:commit_author(Author),
+    CR = label(_, ok(user(Reviewer))),
+    gerrit:commit_author(user(Author)),
     Author \= Reviewer,
     !.
 
