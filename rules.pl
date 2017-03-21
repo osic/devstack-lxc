@@ -21,7 +21,8 @@
 % commit_committer(user(1000000), 'Castulo J. Martinez', 'castulo.martinez@intel.com').
 % commit_message('Add plugin support to Gerrit').
 
-submit_rule(submit(CR, V)) :-
+submit_rule(submit(CR, V, T)) :-
     gerrit:commit_author(user(ID)),
     CR = label('Code-Review', ok(user(ID))),
-    V = label('Verified', reject(user(ID))).
+    V = label('Verified', ok(user(ID))),
+    T = label('Some-Test-Label', reject(user(ID))).
