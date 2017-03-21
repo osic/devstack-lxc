@@ -9,9 +9,10 @@
 
 submit_rule(submit(CR)) :-
     base(CR),
-    CR = label('Code-Review', ok(user(Reviewer))),
-    gerrit:commit_author(user(Author)),
-    Author \= Reviewer.
+    CR = label('Code-Review', ok(Reviewer)),
+    gerrit:commit_author(Author),
+    Author \= Reviewer
+    !.
 
 %submit_rule(submit(CR, N)) :-
 %    base(CR),
