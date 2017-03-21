@@ -9,7 +9,7 @@
 
 submit_rule(submit(CR)) :-
     base(CR),
-    CR = label('Code-Review', ok(Reviewer)),
+    CR = label(_, ok(Reviewer)),
     gerrit:commit_author(Author),
     Author \= Reviewer,
     !.
