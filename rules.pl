@@ -11,12 +11,11 @@ submit_rule(submit(CR)) :-
     base(CR),
     CR = label('Code-Review', ok(user(Reviewer))),
     gerrit:commit_author(user(Author)),
-    Author \= Reviewer,
-    !.
+    Author \= Reviewer.
 
-submit_rule(submit(CR, N)) :-
-    base(CR),
-    N = label('Non-Author-Code-Review', need(_)).
+%submit_rule(submit(CR, N)) :-
+%    base(CR),
+%    N = label('Non-Author-Code-Review', need(_)).
 
 base(CR) :-
     gerrit:max_with_block(-2, 2, 'Code-Review', CR).
