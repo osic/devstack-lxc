@@ -30,5 +30,5 @@ submit_rule(submit(CR)) :-
     %gerrit:commit_author(Author),
     %CR = label(_, ok(_, Reviewer, _)),
     Reviewer = 'Castulo J. Martinez',
-    Author = Reviewer.
-    %Author \= 'Castulo J. Martinez'.
+    %Author = Reviewer.
+    Author \= 'Castulo J. Martinez'.
