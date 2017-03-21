@@ -22,7 +22,7 @@
 % commit_message('Add plugin support to Gerrit').
 
 submit_rule(submit(CR)) :-
-    CR = label('Code-Review', ok(Reviewer)).
+    CR = label(_, ok(Reviewer)).
     %gerrit:max_with_block(-2, 2, 'Code-Review', CR),
     %gerrit:commit_author(Author),
     
