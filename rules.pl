@@ -21,11 +21,11 @@
 %base(CR) :-
 %    gerrit:max_with_block(-2, 2, 'Code-Review', CR).
 
-submit_rule(submit(CR, N)) :-
-    gerrit:max_with_block(-2, 2, 'Code-Review', CR),
-    NAR = label('Non-Author-Code-Review', need(_)).
-
 submit_rule(submit(CR)) :-
     gerrit:max_with_block(-2, 2, 'Code-Review', CR),
     gerrit:commit_author(_, Author, -),
     Author == 'Castulo J. Martinez'.
+
+submit_rule(submit(CR, N)) :-
+    gerrit:max_with_block(-2, 2, 'Code-Review', CR),
+    N = label('Non-Author-Code-Review', need(_)).
