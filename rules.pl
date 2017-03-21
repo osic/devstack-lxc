@@ -29,6 +29,6 @@ submit_rule(submit(CR)) :-
     gerrit:commit_author(_, Author, -),
     %gerrit:commit_author(Author),
     %CR = label(_, ok(_, Reviewer, _)),
-    Reviewer = 'Castulo J. Martinez',
+    gerrit:reviewer(_, Reviewer, _),
     %Author = Reviewer.
     Author \= 'Castulo J. Martinez'.
