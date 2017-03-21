@@ -25,4 +25,4 @@ submit_rule(submit(CR, V, T)) :-
     gerrit:commit_author(user(ID)),
     CR = label('Code-Review', ok(user(ID))),
     V = label('Verified', ok(user(ID))),
-    T = label('Some-Test-Label', reject(user(ID))).
+    T = label('Some-Test-Label', need(_)).
