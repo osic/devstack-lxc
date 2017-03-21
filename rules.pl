@@ -24,7 +24,7 @@
 submit_rule(submit(CR)) :-
     gerrit:max_with_block(-2, 2, 'Code-Review', CR),
     gerrit:commit_author(Author),
-    'Castulo J. Martinez' = 'Castulo J. Martinez',
+    'Castulo J. Martinez' \= 'Castulo J. Martinez',
     !.
 
 submit_rule(submit(CR, N)) :-
