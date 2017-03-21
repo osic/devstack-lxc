@@ -23,4 +23,4 @@
 
 submit_rule(submit(CR)) :-
     %CR = label(_, ok(Reviewer)),
-    CR = label('Code-Review', ok(user(ID))).
+    CR = label('Code-Review', ok(user(1))).
