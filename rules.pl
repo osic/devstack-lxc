@@ -23,7 +23,7 @@
 
 submit_rule(submit(CR)) :-
     %CR = label(_, ok(Reviewer)).
-    CR = label('My-Label', ok(User(1))).
+    CR = label('My-Label', ok(user(1))).
     %gerrit:max_with_block(-2, 2, 'Code-Review', CR),
     %gerrit:commit_author(Author),
     
