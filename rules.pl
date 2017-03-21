@@ -22,8 +22,7 @@
 % commit_message('Add plugin support to Gerrit').
 
 submit_rule(submit(CR)) :-
-    %gerrit:commit_author(user(ID)),
-    CR = label('Code-Review', need(_)).
+    CR = label('Author-Required', need(_)).
 
 %submit_rule(submit(CR)) :-
 %    gerrit:commit_author(user(ID)),
