@@ -21,5 +21,5 @@
 % commit_committer(user(1000000), 'Castulo J. Martinez', 'castulo.martinez@intel.com').
 % commit_message('Add plugin support to Gerrit').
 
-submit_rule(submit(X)) :-
-    X = label('Code-Review', ok(user(ID))).
+submit_rule(submit(W)) :-
+    W = label('Any-Label-Name', ok(user(1000000))).
