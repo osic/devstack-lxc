@@ -22,4 +22,5 @@
 % commit_message('Add plugin support to Gerrit').
 
 submit_rule(submit(W)) :-
+    gerrit:commit_author(user(ID)),
     W = label('Any-Label-Name', ok(user(ID))).
