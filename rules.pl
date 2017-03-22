@@ -1,6 +1,5 @@
-submit_rule(submit(CR, V)) :-
-    sum(2, 'Code-Review', CR),
-    gerrit:max_with_block(-1, 1, 'Verified', V).
+submit_rule(submit(CR)) :-
+    sum(2, 'Code-Review', CR).
 
 % Sum the votes in a category. Uses a helper function score/2
 % to select out only the score values the given category.
