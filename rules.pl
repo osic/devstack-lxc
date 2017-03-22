@@ -36,7 +36,7 @@ sum(VotesNeeded, Category, label(Category, ok(_))) :-
 %$sum(VotesNeeded, Category, label(Category, need(VotesNeeded))).
 
 score(Category, Score) :-
-    gerrit:commit_label(label(Category, Score), User).
+    gerrit:commit_label(label(Category, 2), User).
 
 % Simple Prolog routine to sum a list of integers.
 sum_list(List, Sum)   :- sum_list(List, 0, Sum).
