@@ -23,7 +23,7 @@
 %    findall(Score, score(Category, Score), All),
 
 submit_rule(submit(CR, V)) :-
-    sum(2, 'Code-Review', CR),
+    sum(1, 'Code-Review', CR),
     gerrit:max_with_block(-1, 1, 'Verified', V).
 
 % Sum the votes in a category. Uses a helper function score/2
