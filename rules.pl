@@ -6,8 +6,7 @@ submit_rule(submit(CR)) :-
 sum(VotesNeeded, Category, label(Category, ok(_))) :-
     findall(Score, score(Category, Score), All),
     sum_list(All, Sum),
-    Sum >= VotesNeeded,
-    !.
+    Sum >= VotesNeeded.
 sum(VotesNeeded, Category, label(Category, need(VotesNeeded))).
 
 score(Category, Score) :-
