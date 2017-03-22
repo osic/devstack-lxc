@@ -33,7 +33,7 @@ sum(VotesNeeded, Category, label(Category, ok(_))) :-
     sum_list(All, Sum),
     Sum >= VotesNeeded,
     !.
-sum(VotesNeeded, Category, label(Category, need(VotesNeeded))).
+$sum(VotesNeeded, Category, label(Category, need(VotesNeeded))).
 
 score(Category, Score) :-
     gerrit:commit_label(label(Category, Score), User).
