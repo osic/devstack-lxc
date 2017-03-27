@@ -14,4 +14,4 @@ Shell scripts to deploy different types of Devstack environments using LXC conta
 
 Note: When referring to multi-node environment we meant 2 nodes.
 Note: We won't be persuing this POC anymore, it has limitations when using Swift and Cinder.
-#Test ignore
+#Test 
